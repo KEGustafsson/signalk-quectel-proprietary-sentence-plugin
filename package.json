@@ -9,9 +9,6 @@
   "keywords": [
     "signalk-node-server-plugin"
   ],
-  "author": "ke.gustafsson@gmail.com",
-  "license": "Apache-2.0",
-  "dependencies": {
-    "@signalk/nmea0183-utilities"
-   }
+  "author": "teppo.kurki@iki.fi",
+  "license": "Apache-2.0"
 }
