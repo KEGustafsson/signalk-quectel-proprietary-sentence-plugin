@@ -24,6 +24,7 @@ module.exports = function (app) {
         if (value >= 360) {
           value = value - 360
         }
+        app.debug("heading: ", value, ", offset: ", headingOffset);
         return {
           updates: [
             {
