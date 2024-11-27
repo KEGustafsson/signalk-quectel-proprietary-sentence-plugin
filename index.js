@@ -12,7 +12,7 @@ module.exports = function (app) {
   const plugin = {}
   plugin.id = plugin.name = plugin.description = 'signalk-quectel-proprietary-sentence-plugin'
 
-  plugin.start = function () {
+  plugin.start = function (options) {
     // Sentence: $PQTMTAR 
     // $PQTMTAR,1,124907.000,6,,1.729,-1.316205,-0.713165,84.344437,0.146003,0.296450,0.045169,00*55
     let headingOffset = options.headingOffset;
