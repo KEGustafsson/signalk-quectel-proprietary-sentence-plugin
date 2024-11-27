@@ -15,11 +15,12 @@ module.exports = function (app) {
   plugin.start = function () {
     // Sentence: $PQTMTAR 
     // $PQTMTAR,1,124907.000,6,,1.729,-1.316205,-0.713165,84.344437,0.146003,0.296450,0.045169,00*55
+    let headingOffset = options.headingOffset;
     app.emitPropertyValue('nmea0183sentenceParser', {
       sentence: 'PQTMTAR',
       parser: ({ id, sentence, parts, tags }, session) => {
         let value
-        value = utils.float(parts[7]) + 90; //NOTE For some reason Quectel orientation need to be rotated +90deg
+        value = utils.float(parts[7]) + headingOffset; //NOTE For some reason Quectel orientation need to be rotated +90deg
         if (value >= 360) {
           value = value - 360
         }
@@ -44,6 +45,15 @@ module.exports = function (app) {
   }
 
   plugin.stop = function () { }
-  plugin.schema = {}
+  plugin.schema = {
+    type: 'object',
+    properties: {
+      headingOffset: {
+        type: 'integer',
+        default: 0,
+        title: 'Heading offset in degrees',
+      },
+    },
+  }
   return plugin
 }
