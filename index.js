@@ -25,6 +25,8 @@ module.exports = function (app) {
           value = value - 360
         }
         app.debug("heading: ", value, ", offset: ", headingOffset);
+        app.debug("antennaDist: ", utils.float(parts[4]) );
+        app.debug("rtkStatus: ", utils.int(parts[2]));
         return {
           updates: [
             {
