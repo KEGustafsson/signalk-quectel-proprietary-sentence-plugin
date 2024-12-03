@@ -10,5 +10,8 @@
     "signalk-node-server-plugin"
   ],
   "author": "teppo.kurki@iki.fi",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@signalk/nmea0183-utilities": "^0.8.1"
+  }
 }
