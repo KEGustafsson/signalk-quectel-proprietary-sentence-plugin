@@ -53,6 +53,7 @@ module.exports = function (app) {
                 values: [
                   { path: 'sensors.heading.lc02h.antennaDist', value: utils.float(parts[4])},
                   { path: 'sensors.heading.lc02h.rtkStatus', value: utils.int(parts[2]) },
+                  { path: 'navigation.headingTrueError', value: utils.transform(angleDifference, 'rad', 'deg') },
                 ]
               }
             ]
@@ -69,6 +70,7 @@ module.exports = function (app) {
                   { path: 'navigation.headingTrue', value: utils.transform(value, 'deg', 'rad')},
                   { path: 'sensors.heading.lc02h.antennaDist', value: utils.float(parts[4])},
                   { path: 'sensors.heading.lc02h.rtkStatus', value: utils.int(parts[2]) },
+                  { path: 'navigation.headingTrueError', value: utils.transform(angleDifference, 'rad', 'deg') },
                 ]
               }
             ]
