@@ -31,9 +31,10 @@ module.exports = function (app) {
           value = value - 360
         }
         app.debug("heading: ", value, ", offset: ", headingOffset);
+        let angleDifference
         if (headingTrueAis && headingTrueAis.values && headingTrueAis.values[targetSource]) {
           const sourceValue = headingTrueAis.values[targetSource];
-          const angleDifference = shortestAngleDifference(sourceValue.value, utils.transform(value, 'deg', 'rad'));
+          angleDifference = shortestAngleDifference(sourceValue.value, utils.transform(value, 'deg', 'rad').toFixed(2));
           app.debug(`Value from ${targetSource}:`, utils.transform(sourceValue.value, 'rad', 'deg'));
           app.debug("Difference: ", utils.transform(angleDifference, 'rad', 'deg'));
           if (Math.abs(angleDifference) > headingOffsetErr * Math.PI / 180) {
@@ -53,7 +54,7 @@ module.exports = function (app) {
                 values: [
                   { path: 'sensors.heading.lc02h.antennaDist', value: utils.float(parts[4])},
                   { path: 'sensors.heading.lc02h.rtkStatus', value: utils.int(parts[2]) },
-                  { path: 'navigation.headingTrueError', value: utils.transform(angleDifference, 'rad', 'deg') },
+                  { path: 'navigation.headingTrueError', value: parseFloat(utils.transform(angleDifference, 'rad', 'deg')) },
                 ]
               }
             ]
@@ -70,7 +71,7 @@ module.exports = function (app) {
                   { path: 'navigation.headingTrue', value: utils.transform(value, 'deg', 'rad')},
                   { path: 'sensors.heading.lc02h.antennaDist', value: utils.float(parts[4])},
                   { path: 'sensors.heading.lc02h.rtkStatus', value: utils.int(parts[2]) },
-                  { path: 'navigation.headingTrueError', value: utils.transform(angleDifference, 'rad', 'deg') },
+                  { path: 'navigation.headingTrueError', value: parseFloat(utils.transform(angleDifference, 'rad', 'deg')) },
                 ]
               }
             ]
